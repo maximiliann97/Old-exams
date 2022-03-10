@@ -1,4 +1,3 @@
-from collections import Counter
 from collections import defaultdict
 
 fn = 'A_Journal_of_the_Plauge_Year.txt'
@@ -33,8 +32,6 @@ def print_table(words, total_words):
     print(line)
     for word, occurence in words.items():
         prob = (words[word]/total_words)*100
-       # print(f'{word} | {words[word]} | {prob:.1f}%')
-        #print('{} | {} | {:.1f}'.format(word, words[word], prob))
         print(f" {word:4s} | {occurence:10d} | {prob:10.1f}%")
 
 
