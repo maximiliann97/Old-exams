@@ -28,10 +28,14 @@ def read_file(filename):
 
 def print_table(words, total_words):
     header = 'word | occurences | probability'
+    line = "-"*len(header)
     print(header)
-    for word, occurences in words.items():
+    print(line)
+    for word, occurence in words.items():
         prob = (words[word]/total_words)*100
-        print(f'{word} {words[word]} {prob:.1f}%')
+       # print(f'{word} | {words[word]} | {prob:.1f}%')
+        #print('{} | {} | {:.1f}'.format(word, words[word], prob))
+        print(f" {word:4s} | {occurence:10d} | {prob:10.1f}%")
 
 
 
