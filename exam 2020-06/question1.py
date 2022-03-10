@@ -4,7 +4,7 @@ from collections import defaultdict
 fn = 'A_Journal_of_the_Plauge_Year.txt'
 
 def filter_file(word):
-    return word.strip('.,!?;:)([]').lower()
+    return word.strip('.,!?;:&)([]').lower()
 
 
 def read_file(filename):
@@ -22,18 +22,26 @@ def read_file(filename):
                     occurences[word] += 1
     print('Total amount of words:', N_words)
     print('Number of unique words:', len(occurences))
-    occurences.items().sort()
-    return occurences
+    occurences_list = sorted(occurences.items(), key=lambda x:x[1])[::-1]
+    sort_occurences = dict(occurences_list)
+    return sort_occurences, N_words
 
-def print_table(words):
-    prob = []
+def print_table(words, total_words):
+    header = 'word | occurences | probability'
+    print(header)
     for word, occurences in words.items():
-        prob.append(words[word]/len(words))
+        prob = (words[word]/total_words)*100
+        print(f'{word} {words[word]} {prob:.1f}%')
 
 
 
 
 
-occurences = read_file(fn)
-print(occurences)
-print_table(occurences)
+
+
+
+
+
+
+occurences, N_words = read_file(fn)
+print_table(occurences, N_words)
