@@ -1,3 +1,5 @@
+import math
+
 class Complex:
     def __init__(self, a, b=0):
         self.a = a
@@ -9,7 +11,7 @@ class Complex:
         else:
             sign = '-'
             self.b = self.b*-1
-        return f'{self.a} {sign} {self.b}im'
+        return f'{self.a} {sign} {self.b}' + 'im'
 
     def real(self):
         return self.a
@@ -18,7 +20,7 @@ class Complex:
         return self.b
 
     def __abs__(self):
-        return abs(self.a + self.b)
+        return math.sqrt(self.a**2 + self.b**2)
 
     def __add__(self, other):
         if not isinstance(other, Complex):
@@ -37,9 +39,29 @@ class Complex:
     def __rmul__(self, other):
         return self * other
 
-    def topolar(self):
-        pass
+    def topolar(self,):
+        self.theta = math.atan2(self.b, self.a)
+        self.r = math.sqrt(self.a**2 + self.b**2)
+        return self.r, self.theta
 
+    @staticmethod
+    def frompolar(r, theta):
+        return Complex(r * math.cos(theta), r*math.sin(theta))
+
+    def __lt__(self, other):
+        return UnorderedException('Complex Numbers are unordered')
+
+
+
+
+class UnorderedException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __str__(self):
+        return self.msg
+
+im = Complex(0, 1)
 
 
 
@@ -53,7 +75,19 @@ print("\nImag / Real")
 #print(z1.imag())
 #print(z1.real())
 z2 = Complex(4, -2)
+
 print("\nArithmethic")
 print(z1 + z2)
 print(3 + z1)
 print(z1 * z2)
+print(5 * z1)
+print(z1 * 5)
+print(abs(z1))
+print(z1 == z1)
+print("\nPolar")
+r, theta = z1.topolar()
+print("r = ", r, "theta = ", theta, "rad")
+
+print(Complex.frompolar(r, theta))
+print("\nException")
+print(z1 < z1)
