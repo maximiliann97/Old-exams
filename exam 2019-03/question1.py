@@ -33,8 +33,25 @@ def write_ini(filename, game_options):
                 if counter == len(game_options[config]):
                     file.write('\n')
 
-def apply_overrides(default_config, user_overrides):
-    pass
+
+def apply_overrides(default, user):
+    for config, option in user.items():
+        if config not in default:
+            print(f'Section "{config}" not found in config. Skipping.')
+        else:
+            for setting, value in user[config].items():
+                if setting not in default[config]:
+                    print('Parameter "{}" not found under section "{}".'.format(setting, config))
+                else:
+                    for def_set, def_value in default[config].items():
+                        default[config][setting] = value
+    print(default)
+
+
+
+
+
+
 
 
 
