@@ -30,9 +30,9 @@ c = [0, 0.001, 0.002]
 x = np.linspace(0, 15, num=20)
 fig, axs = plt.subplots(2, 2)
 axes = [[0, 0], [0, 1], [1, 0], [1, 1]]
+angels = ['α = π/3', 'α = π/4', 'α = π/5', 'α = π/6']
 index = 0
 
-angels = ['pi/3', 'pi/4', 'pi/5', 'pi/6']
 
 for a in alpha:
     for i in c:
@@ -49,7 +49,6 @@ for a in alpha:
         axs[pos[0], pos[1]].legend(c, title='c')
 
     index += 1
-
 
 
 plt.show()
